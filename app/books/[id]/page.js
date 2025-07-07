@@ -16,6 +16,7 @@ export default function BookDetailsPage() {
       
     if (!foundBook) {
       router.push('/');
+      return;
     };
 
     setBook(foundBook);

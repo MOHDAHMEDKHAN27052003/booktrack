@@ -25,6 +25,7 @@ export default function ProfilePage() {
       
     if (!signedInUser) {
       router.push('/signin');
+      return;
     };
       
     setUser(JSON.parse(signedInUser));
