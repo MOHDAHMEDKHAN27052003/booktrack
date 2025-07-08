@@ -3,12 +3,29 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { toast } from 'react-toastify';
 
 export default function BookDetailsPage() {
   const { id } = useParams();
   const router = useRouter();
   const [book, setBook] = useState('');
   const [user, setUser] = useState(null);
+
+  const handleDelete = () => {
+    const confirm = window.confirm('Confirm delete!');
+
+    if (!confirm) return;
+
+    const books = JSON.parse(localStorage.getItem('books')) || [];
+    const updatedBooks = books.filter((b) => b.id.toString() !== id);
+
+    localStorage.setItem('books', JSON.stringify(updatedBooks));
+
+    toast.error('Book deleted successfully!', {
+      autoClose: 1500,
+      onClose: () => router.push('/')
+    });
+  };
 
   useEffect(() => {
     const storedBooks = JSON.parse(localStorage.getItem('books')) || [];
@@ -38,9 +55,14 @@ export default function BookDetailsPage() {
       <p><strong>Description:</strong> {book.description}</p>
       <p><strong>Created By:</strong> {book.createdBy}</p>
       {user?.role === 'admin' && (
-        <Link href={`/books/${book.id}/edit`}>
-          <button>Edit Book</button>
-        </Link>
+        <div>
+          <Link href={`/books/${book.id}/edit`}>
+            <button>Edit</button>
+          </Link>
+          <button onClick={handleDelete}>
+            Delete
+          </button>
+        </div>
       )}
     </div>
   );
