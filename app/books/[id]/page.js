@@ -11,6 +11,29 @@ export default function BookDetailsPage() {
   const [book, setBook] = useState('');
   const [user, setUser] = useState(null);
 
+  const handleIssue = () => {
+    const issuedBooks = JSON.parse(localStorage.getItem('issuedBooks')) || [];
+
+    const alreadyIssued = issuedBooks.find(
+      (entry) => entry.bookId === book.id && entry.userEmail === user.email
+    );
+
+    if (alreadyIssued) {
+      toast.error('Book already issued!');
+      return;
+    };
+
+    const newEntry = {
+      bookId: book.id,
+      userEmail: user.email,
+      issuedAt: new Date().toISOString(),
+    };
+
+    localStorage.setItem('issuedBooks', JSON.stringify([...issuedBooks, newEntry]));
+
+    toast.success('Book issued successfully!');
+  };
+
   const handleDelete = () => {
     const confirm = window.confirm('Confirm delete!');
 
@@ -63,6 +86,13 @@ export default function BookDetailsPage() {
             Delete
           </button>
         </div>
+      )}
+      {user?.role === 'user' && (
+        <button
+          onClick={handleIssue}
+        >
+          Issue Book
+        </button>
       )}
     </div>
   );
