@@ -23,6 +23,15 @@ export default function BookDetailsPage() {
       return;
     };
 
+    const userIssuedCount = issuedBooks.filter(
+      (entry) => entry.userEmail === user.email
+    ).length;
+
+    if (userIssuedCount >= 3) {
+      toast.error("You've reached the limit!");
+      return;
+    };
+
     const newEntry = {
       bookId: book.id,
       userEmail: user.email,

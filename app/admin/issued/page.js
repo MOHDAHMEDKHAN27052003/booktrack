@@ -15,7 +15,7 @@ export default function AdminIssuedBooksPage() {
     if (!signedInUser || signedInUser.role !== 'admin') {
       router.push('/');
       return;
-    }
+    };
 
     setUser(signedInUser);
 
