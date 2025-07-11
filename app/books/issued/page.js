@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 export default function IssuedBooksPage() {
   const [issuedBooks, setIssuedBooks] = useState([]);
@@ -11,33 +12,55 @@ export default function IssuedBooksPage() {
 
   useEffect(() => {
     const signedInUser = JSON.parse(localStorage.getItem('signedInUser'));
-      
+
     if (!signedInUser || signedInUser.role !== 'user') {
       router.push('/');
       return;
     };
 
     setUser(signedInUser);
+    loadIssuedBooks(signedInUser);
+  }, [router]);
 
+  const loadIssuedBooks = (user) => {
     const allIssued = JSON.parse(localStorage.getItem('issuedBooks')) || [];
     const allBooks = JSON.parse(localStorage.getItem('books')) || [];
 
-    const userIssued = allIssued.filter((entry) => entry.userEmail === signedInUser.email);
-      
-    const detailed = userIssued.map((entry) => {
-      const book = allBooks.find((b) => b.id === entry.bookId);
-        
-      return book
-        ? {
-            ...book,
-            issuedAt: entry.issuedAt,
-          }
-        : null;
-    }).filter(Boolean);
+    const userIssued = allIssued.filter((entry) => entry.userEmail === user.email);
+    const detailed = userIssued
+      .map((entry) => {
+        const book = allBooks.find((b) => b.id === entry.bookId);
+        return book
+          ? {
+              ...book,
+              issuedAt: entry.issuedAt,
+              bookId: entry.bookId, // so we can return using this
+            }
+          : null;
+      })
+      .filter(Boolean);
 
     setIssuedBooks(detailed);
     setBooks(allBooks);
-  }, [router]);
+  };
+
+  const handleReturn = (bookId) => {
+    const confirm = window.confirm("Confirm book return!");
+
+    if (!confirm) {
+      return;
+    };
+
+    const allIssued = JSON.parse(localStorage.getItem('issuedBooks')) || [];
+
+    const updated = allIssued.filter(
+      (entry) => !(entry.bookId === bookId && entry.userEmail === user.email)
+    );
+
+    localStorage.setItem('issuedBooks', JSON.stringify(updated));
+    toast.success('Book returned successfully!');
+    loadIssuedBooks(user); // refresh list
+  };
 
   return (
     <div>
@@ -49,7 +72,7 @@ export default function IssuedBooksPage() {
         <div>
           {issuedBooks.map((book) => (
             <div
-              key={book.id}
+              key={book.bookId}
             >
               <img
                 src={book.image}
@@ -60,6 +83,11 @@ export default function IssuedBooksPage() {
               <p>
                 Issued on: {new Date(book.issuedAt).toLocaleDateString()}
               </p>
+              <button
+                onClick={() => handleReturn(book.bookId)}
+              >
+                Return Book
+              </button>
             </div>
           ))}
         </div>
