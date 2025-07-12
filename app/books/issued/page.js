@@ -58,6 +58,14 @@ export default function IssuedBooksPage() {
     );
 
     localStorage.setItem('issuedBooks', JSON.stringify(updated));
+
+    const notReturned = JSON.parse(localStorage.getItem('notReturned')) || [];
+    const updatedNotReturned = notReturned.filter(
+      (entry) => !(entry.bookId === bookId && entry.userEmail === user.email)
+    );
+    
+    localStorage.setItem('notReturned', JSON.stringify(updatedNotReturned));
+
     toast.success('Book returned successfully!');
     loadIssuedBooks(user); // refresh list
   };

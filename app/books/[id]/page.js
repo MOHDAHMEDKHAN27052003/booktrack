@@ -39,8 +39,33 @@ export default function BookDetailsPage() {
     };
 
     localStorage.setItem('issuedBooks', JSON.stringify([...issuedBooks, newEntry]));
-
     toast.success('Book issued successfully!');
+    router.push("/books/issued");
+
+    setTimeout(() => {
+      const currentIssued = JSON.parse(localStorage.getItem('issuedBooks')) || [];
+
+      const stillIssued = currentIssued.find(
+        (entry) => entry.bookId === book.id && entry.userEmail === user.email
+      );
+
+      if (stillIssued) {
+        const notReturned = JSON.parse(localStorage.getItem('notReturned')) || [];
+        const alreadyMarked = notReturned.find(
+          (entry) => entry.bookId === book.id && entry.userEmail === user.email
+        );
+
+        if (!alreadyMarked) {
+          notReturned.push({
+            bookId: book.id,
+            userEmail: user.email,
+            timestamp: new Date().toISOString(),
+          });
+          localStorage.setItem('notReturned', JSON.stringify(notReturned));
+          toast.warn('You did not return this book in 10 seconds!');
+        };
+      };
+    }, 10000);
   };
 
   const handleDelete = () => {
@@ -89,7 +114,7 @@ export default function BookDetailsPage() {
       {user?.role === 'admin' && (
         <div>
           <Link href={`/books/${book.id}/edit`}>
-            <button>Edit</button>
+            Edit
           </Link>
           <button onClick={handleDelete}>
             Delete
@@ -102,6 +127,11 @@ export default function BookDetailsPage() {
         >
           Issue Book
         </button>
+      )}
+      {!user && (
+        <Link href={"/signin"}>
+          Issue Book
+        </Link>
       )}
     </div>
   );
