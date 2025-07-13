@@ -62,7 +62,6 @@ export default function BookDetailsPage() {
             timestamp: new Date().toISOString(),
           });
           localStorage.setItem('notReturned', JSON.stringify(notReturned));
-          toast.warn('You did not return this book in 10 seconds!');
         };
       };
     }, 10000);
