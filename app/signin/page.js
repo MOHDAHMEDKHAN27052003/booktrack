@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { findEmail } from '@/lib/auth';
+import Link from 'next/link';
 
 export default function SignIn() {
   const { register, handleSubmit, reset } = useForm();
@@ -30,7 +31,7 @@ export default function SignIn() {
 
   return (
     <div>
-      <h2>Sign In</h2>
+      <h2>SignIn</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
 
         <div>
@@ -43,7 +44,12 @@ export default function SignIn() {
           <input type="password" {...register('password', { required: 'Password is required' })} />
         </div>
 
-        <button>Sign In</button>
+        <button>SignIn</button>
+
+        <div>
+          <small>Don't have an account?</small>
+          <Link href={"/signup"}>SignUp</Link>
+        </div>
       </form>
     </div>
   );

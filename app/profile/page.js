@@ -12,7 +12,7 @@ export default function ProfilePage() {
     const confirm = window.confirm("Confirm Sign Out");  
       
     if (!confirm) {
-        return;
+      return;
     };
 
     localStorage.removeItem('signedInUser');
