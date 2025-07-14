@@ -8,6 +8,7 @@ export default function Home() {
   const [search, setSearch] = useState('');
   const [genre, setGenre] = useState('All');
   const [genres, setGenres] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(5);
   const router = useRouter();
 
   useEffect(() => {
@@ -28,6 +29,13 @@ export default function Home() {
     return matchesSearch && matchesGenre;
   });
 
+  const visibleBooks = filteredBooks.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredBooks.length;
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 5);
+  };
+
   return (
     <div>
       <h2>All Books</h2>
@@ -36,12 +44,18 @@ export default function Home() {
           type="text"
           placeholder="Search..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setVisibleCount(5); // Reset on search
+          }}
         />
 
         <select
           value={genre}
-          onChange={(e) => setGenre(e.target.value)}
+          onChange={(e) => {
+            setGenre(e.target.value);
+            setVisibleCount(5); // Reset on genre change
+          }}
         >
           {genres.map((g, i) => (
             <option key={i} value={g}>
@@ -51,11 +65,11 @@ export default function Home() {
         </select>
       </div>
 
-      {filteredBooks.length === 0 ? (
+      {visibleBooks.length === 0 ? (
         <p>No books found.</p>
       ) : (
         <div>
-          {filteredBooks.map((book) => (
+          {visibleBooks.map((book) => (
             <div
               key={book.id}
               onClick={()=>{router.push(`/books/${book.id}`)}}
@@ -69,6 +83,12 @@ export default function Home() {
               <p>{book.genre}</p>
             </div>
           ))}
+            
+          {hasMore ? (
+            <button onClick={handleLoadMore}>Load More</button>
+          ) : (
+            <p>You've reached the end of the list!</p>
+          )}
         </div>
       )}
     </div>

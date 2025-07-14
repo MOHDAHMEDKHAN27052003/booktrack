@@ -7,6 +7,7 @@ export default function AdminIssuedBooksPage() {
   const [issuedBooks, setIssuedBooks] = useState([]);
   const [user, setUser] = useState(null);
   const [booksMap, setBooksMap] = useState({});
+  const [visibleCount, setVisibleCount] = useState(5);
   const router = useRouter();
 
   useEffect(() => {
@@ -32,6 +33,13 @@ export default function AdminIssuedBooksPage() {
     setIssuedBooks(issued);
   }, [router]);
 
+  const visibleIssuedBooks = issuedBooks.slice(0, visibleCount);
+  const hasMore = visibleCount < issuedBooks.length;
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 5);
+  };
+
   return (
     <div>
       <h2>All Issued Books</h2>
@@ -40,7 +48,7 @@ export default function AdminIssuedBooksPage() {
         <p>No books have been issued yet.</p>
       ) : (
         <div>
-          {issuedBooks.map((entry, index) => {
+          {visibleIssuedBooks.map((entry, index) => {
             const book = booksMap[entry.bookId];
 
             if (!book) return null;
@@ -60,6 +68,12 @@ export default function AdminIssuedBooksPage() {
               </div>
             );
           })}
+            
+          {hasMore ? (
+            <button onClick={handleLoadMore}>Load More</button>
+          ) : (
+            <p>You've reached the end of the list.</p>
+          )}
         </div>
       )}
     </div>
