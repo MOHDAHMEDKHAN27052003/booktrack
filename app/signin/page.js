@@ -29,10 +29,16 @@ export default function SignIn() {
     router.push("/profile");
   };
 
+  const onError = (errors) => {
+    Object.values(errors).forEach((error) => {
+      toast.error(error.message);
+    });
+  };
+
   return (
     <div>
       <h2>SignIn</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit, onError)}>
 
         <div>
           <label>Email</label>

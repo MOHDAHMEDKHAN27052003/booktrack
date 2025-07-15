@@ -58,11 +58,17 @@ export default function CreateBookPage() {
     setPreview('');
     router.push('/');
   };
+
+  const onError = (errors) => {
+    Object.values(errors).forEach((error) => {
+      toast.error(error.message);
+    });
+  };
     
   return (
     <div>
       <h2>Create a Book</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit, onError)}>
         <div>
           <label>Image</label>
           <input type="file" accept="image/*" onChange={handleImageUpload} />
@@ -77,12 +83,20 @@ export default function CreateBookPage() {
         </div>
         <div>
           <label>Title</label>
-          <input {...register('title', { required: 'Title is required' })} />
+          <input {...register('title', {
+            required: 'Title is required',
+            minLength: { value: 3, message: 'Title must be at least 3 characters' },
+            maxLength: { value: 30, message: 'Title can\'t exceed 30 characters' }
+          })} />
         </div>
 
         <div>
           <label>Author</label>
-          <input {...register('author', { required: 'Author is required' })} />
+          <input {...register('author', {
+            required: 'Author is required',
+            minLength: { value: 3, message: 'Name must be at least 3 characters' },
+            maxLength: { value: 30, message: 'Name can\'t exceed 30 characters' }
+          })} />
         </div>
 
         <div>
@@ -101,7 +115,11 @@ export default function CreateBookPage() {
           <label>Description</label>
           <textarea
             rows="4"
-            {...register('description', { required: 'Description is required' })}
+            {...register('description', {
+              required: 'Description is required',
+              minLength: { value: 15, message: 'Description must be at least 15 characters' },
+              maxLength: { value: 150, message: 'Description can\'t exceed 150 characters' }
+            })}
           ></textarea>
         </div>
 

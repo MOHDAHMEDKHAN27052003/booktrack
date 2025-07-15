@@ -109,7 +109,6 @@ export default function BookDetailsPage() {
       <p><strong>Author:</strong> {book.author}</p>
       <p><strong>Genre:</strong> {book.genre}</p>
       <p><strong>Description:</strong> {book.description}</p>
-      <p><strong>Created By:</strong> {book.createdBy}</p>
       {user?.role === 'admin' && (
         <div>
           <Link href={`/books/${book.id}/edit`}>
