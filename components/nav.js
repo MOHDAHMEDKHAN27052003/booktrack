@@ -83,7 +83,7 @@ export default function Navbar() {
       </nav>
       <div className={`md:hidden transition-all duration-300 ease-in-out transform overflow-hidden ${
           isOpen ? 'max-h-[500px] opacity-100 scale-100' : 'max-h-0 opacity-0 scale-95'
-        } px-4 sm:px-16`}>
+        } px-6 sm:px-16`}>
         <div className="flex flex-col gap-4 py-8 items-center rounded-2xl bg-black text-white">
           {user?.role === 'admin' && (
             <>
