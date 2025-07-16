@@ -88,7 +88,11 @@ export default function SignUpPage() {
             </select>
           </div>
 
-          <button className='px-4 py-2 rounded-lg bg-white text-green-600 w-full cursor-pointer'>Sign Up</button>
+          <button
+            className='px-4 py-2 rounded-lg bg-white text-green-600 w-full cursor-pointer'
+          >
+            Sign Up
+          </button>
 
           <div className='flex items-center justify-center py-4'>
             <small>Already have an account?</small>
