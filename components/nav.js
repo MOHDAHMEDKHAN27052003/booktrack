@@ -37,7 +37,7 @@ export default function Navbar() {
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
-        <div className="hidden md:flex bg-black text-white px-24 py-4 rounded-lg">
+        <div className="hidden md:flex bg-gray-800 text-white px-24 py-4 rounded-lg">
           {user?.role === 'admin' && (
             <div className='flex gap-16'>
               <Link href="/admin/issued" className={linkClass('/admin/issued')}>
