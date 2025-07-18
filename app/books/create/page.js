@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+import Image from 'next/image';
 
 export default function CreateBookPage() {
   const { register, handleSubmit, reset, setValue } = useForm();
@@ -66,7 +67,7 @@ export default function CreateBookPage() {
   };
     
   return (
-    <div className='flex justify-center px-6 py-12 sm:py-20'>
+    <div className='flex justify-center px-6 py-12 sm:py-16'>
       <div className='px-6 sm:px-12 py-12 sm:py-16 rounded-2xl bg-green-600 text-white'>
         <h2 className='text-4xl pb-4'>Create a Book</h2>
         <form onSubmit={handleSubmit(onSubmit, onError)}>
@@ -74,12 +75,13 @@ export default function CreateBookPage() {
             <label className='text-xl'>Image :</label>
             <input type="file" accept="image/*" onChange={handleImageUpload} className='w-full text-xl' />
             <input type="hidden" {...register('image', { required: 'Image is required' })} />
-
             {preview && (
               <div className='flex justify-center py-4'>
-                <img
+                <Image
                   src={preview}
                   alt="Book Preview"
+                  height={0}
+                  width={0}
                   className='rounded-2xl h-32 w-64'
                 />
               </div>
@@ -107,7 +109,7 @@ export default function CreateBookPage() {
             />
           </div>
 
-          <div className='flex justify-between pb-4'>
+          <div className='flex justify-between items-center pb-4'>
             <label className='text-xl'>Genre :</label>
             <select
               {...register('genre', { required: 'Genre is required' })}
@@ -138,7 +140,7 @@ export default function CreateBookPage() {
             <button
               className='px-4 py-2 rounded-lg bg-white text-green-600 cursor-pointer'
             >
-              Create Book
+              Create
             </button>
           </div>
         </form>
