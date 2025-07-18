@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+import Image from 'next/image';
 
 export default function IssuedBooksPage() {
   const [issuedBooks, setIssuedBooks] = useState([]);
@@ -71,35 +72,43 @@ export default function IssuedBooksPage() {
   };
 
   return (
-    <div>
-      <h2>Your Issued Books</h2>
-
-      {issuedBooks.length === 0 ? (
-        <p>You have not issued any books.</p>
-      ) : (
-        <div>
-          {issuedBooks.map((book) => (
-            <div
-              key={book.bookId}
-            >
-              <img
-                src={book.image}
-                alt={book.title}
-              />
-              <h4>{book.title}</h4>
-              <p>{book.author}</p>
-              <p>
-                Issued on: {new Date(book.issuedAt).toLocaleDateString()}
-              </p>
-              <button
-                onClick={() => handleReturn(book.bookId)}
+    <div className='flex justify-center py-8'>
+      <div>
+        <h2 className='text-2xl pb-8'>Your Issued Books</h2>
+        {issuedBooks.length === 0 ? (
+          <p>You have not issued any books.</p>
+        ) : (
+          <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-12'>
+            {issuedBooks.map((book) => (
+              <div
+                key={book.bookId}
+                className='flex flex-col gap-2 bg-gray-800 text-white px-6 py-16 rounded-2xl text-center'
               >
-                Return Book
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
+                <Image
+                  src={book.image}
+                  alt={book.title}
+                  height={0}
+                  width={0}
+                  className='h-40 w-60 rounded-2xl'
+                />
+                <h4 className='text-2xl'>{book.title}</h4>
+                <p>{book.author}</p>
+                <p>
+                  Issued on: {new Date(book.issuedAt).toLocaleDateString()}
+                </p>
+                <div className='pt-4'>
+                  <button
+                    onClick={() => handleReturn(book.bookId)}
+                    className='px-6 py-2 rounded-lg cursor-pointer bg-blue-600'
+                  >
+                    Return
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

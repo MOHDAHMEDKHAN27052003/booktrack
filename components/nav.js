@@ -32,7 +32,7 @@ export default function Navbar() {
 
         <button
           onClick={toggleMenu}
-          className="md:hidden"
+          className="md:hidden cursor-pointer"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
