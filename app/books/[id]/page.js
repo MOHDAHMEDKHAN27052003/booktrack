@@ -116,32 +116,40 @@ export default function BookDetailsPage() {
           <p><strong>Genre:</strong> {book.genre}</p>
           <p><strong>Description:</strong> {book.description}</p>
           {user?.role === 'admin' && (
-          <div className='flex justify-center gap-12 py-6'>
-            <Link
-              href={`/books/${book.id}/edit`}
-              className='bg-yellow-400 text-white px-6 py-2 rounded-lg'  
-            >
-              Edit
-            </Link>
-            <button
-              onClick={handleDelete}
-              className='bg-red-600 text-white cursor-pointer px-6 py-2 rounded-lg'
-            >
-              Delete
-            </button>
-          </div>
+            <div className='flex justify-center gap-12 py-6'>
+              <Link
+                href={`/books/${book.id}/edit`}
+                className='bg-yellow-400 text-white px-6 py-2 rounded-lg'  
+              >
+                Edit
+              </Link>
+              <button
+                onClick={handleDelete}
+                className='bg-red-600 text-white cursor-pointer px-6 py-2 rounded-lg'
+              >
+                Delete
+              </button>
+            </div>
           )}
           {user?.role === 'user' && (
-          <button
-            onClick={handleIssue}
-          >
-            Issue Book
-          </button>
+            <div  className='text-center py-8'>
+              <button
+                onClick={handleIssue}
+                className='bg-blue-600 text-white px-6 py-2 rounded-lg'
+              >
+                Issue Book
+              </button>
+            </div>
           )}
           {!user && (
-          <Link href={"/signin"}>
-            Issue Book
-          </Link>
+            <div className='text-center py-8'>
+              <Link
+                href={"/signin"}
+                className='bg-blue-600 text-white px-6 py-2 rounded-lg' 
+              >
+                Issue Book
+              </Link>
+            </div>
           )}
         </div>
       </div>

@@ -67,7 +67,7 @@ export default function Home() {
             setSearch(e.target.value);
             setVisibleCount(6); // Reset on search
           }}
-          className='px-4 py-2 rounded-lg bg-green-400'
+          className='px-4 py-2 rounded-lg bg-green-400 text-white outline-0'
         />
 
         <select
@@ -76,7 +76,7 @@ export default function Home() {
             setGenre(e.target.value);
             setVisibleCount(6); // Reset on genre change
           }}
-          className='p-2 rounded-lg bg-green-400 text-white'
+          className='p-2 rounded-lg bg-green-400 text-white outline-0'
         >
           {genres.map((g, i) => (
             <option
@@ -87,6 +87,17 @@ export default function Home() {
             </option>
           ))}
         </select>
+
+        <button
+          onClick={() => {
+            setSearch('');
+            setGenre('All');
+            setVisibleCount(6);
+          }}
+          className='bg-red-600 text-white px-6 py-2 rounded-lg cursor-pointer'
+        >
+          Reset
+        </button>  
       </div>
 
       {visibleBooks.length === 0 ? (
