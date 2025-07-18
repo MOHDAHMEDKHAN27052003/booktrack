@@ -58,9 +58,6 @@ export default function Home() {
         </div>
       )}
       <div className='px-16 py-4 sm:px-24'>
-
-      
-
       <div className='flex flex-col sm:flex-row items-center gap-4 pt-8 pb-12'>
         <input
           type="text"
