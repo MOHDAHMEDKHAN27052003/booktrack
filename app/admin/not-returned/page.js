@@ -41,29 +41,30 @@ export default function NotReturnedPage() {
   };
 
   return (
-    <div>
-      <h2>Not Returned Books</h2>
-      {entries.length === 0 ? (
-        <p>No book due 😄</p>
-      ) : (
-        <div>
-          <ul>
-            {visibleEntries.map((entry, idx) => (
-              <li key={idx}>
-                📚 <strong>{entry.title}</strong> (ID: {entry.bookId}) <br />
-                👤 Issued by: {entry.userEmail} <br />
-                ⏱️ Marked at: {new Date(entry.timestamp).toLocaleTimeString()}
-              </li>
-            ))}
-          </ul>
-
-          {hasMore ? (
-            <button onClick={handleLoadMore}>Load More</button>
-          ) : (
-            <p>You've reached the end of the list.</p>
-          )}
-        </div>
-      )}
+    <div className='flex justify-center'>
+      <div className='py-8'>
+        <h2 className='text-2xl md:text-4xl'>Not Returned Books</h2>
+        {entries.length === 0 ? (
+          <p>No book due 😄</p>
+        ) : (
+          <div className='py-6 md:py-8'>
+            <ul className='flex flex-col gap-4'>
+              {visibleEntries.map((entry, idx) => (
+                <li key={idx}>
+                  📚 <strong>{entry.title}</strong> (ID: {entry.bookId}) <br />
+                  👤 Issued by: {entry.userEmail} <br />
+                  ⏱️ Marked at: {new Date(entry.timestamp).toLocaleTimeString()}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {hasMore ? (
+          <button onClick={handleLoadMore}>Load More</button>
+        ) : (
+          <p className='text-xl text-center'>You've reached the end of the list.</p>
+        )}
+      </div>
     </div>
   );
 };

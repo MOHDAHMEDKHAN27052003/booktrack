@@ -40,8 +40,8 @@ export default function Navbar() {
         <div className="hidden md:flex bg-gray-800 text-white px-24 py-4 rounded-lg">
           {user?.role === 'admin' && (
             <div className='flex gap-16'>
-              <Link href="/admin/issued" className={linkClass('/admin/issued')}>
-                Issued Books
+              <Link href="/" className={linkClass('/')}>
+                Home
               </Link>
               <Link href="/books/create" className={linkClass("/books/create")}>
                 Create Book
