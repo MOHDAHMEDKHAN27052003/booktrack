@@ -133,7 +133,7 @@ export default function CreateBookPage() {
                 minLength: { value: 15, message: 'Description must be at least 15 characters' },
                 maxLength: { value: 150, message: 'Description can\'t exceed 150 characters' }
               })}
-              className='w-full bg-white text-black outline-0 rounded-lg'
+              className='p-2 w-full bg-white text-black outline-0 rounded-lg'
             ></textarea>
           </div>
           <div className='py-8 text-right'>

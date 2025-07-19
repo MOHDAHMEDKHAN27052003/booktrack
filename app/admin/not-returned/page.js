@@ -47,7 +47,7 @@ export default function NotReturnedPage() {
         {entries.length === 0 ? (
           <p className='py-16 text-center'>No book due 😄</p>
         ) : (
-          <div className='py-6 md:py-8'>
+          <div className='py-12'>
             <ul className='flex flex-col gap-4'>
               {visibleEntries.map((entry, idx) => (
                 <li key={idx}>
