@@ -43,9 +43,9 @@ export default function NotReturnedPage() {
   return (
     <div className='flex justify-center'>
       <div className='py-8'>
-        <h2 className='text-2xl md:text-4xl'>Not Returned Books</h2>
+        <h2 className='text-2xl md:text-4xl text-center'>Not Returned Books</h2>
         {entries.length === 0 ? (
-          <p>No book due 😄</p>
+          <p className='py-16 text-center'>No book due 😄</p>
         ) : (
           <div className='py-6 md:py-8'>
             <ul className='flex flex-col gap-4'>
@@ -60,9 +60,16 @@ export default function NotReturnedPage() {
           </div>
         )}
         {hasMore ? (
-          <button onClick={handleLoadMore}>Load More</button>
+          <div className='text-center'>
+            <button
+              onClick={handleLoadMore}
+              className='bg-green-400 text-white px-4 py-2 rounded-lg cursor-pointer'
+            >
+              Load More
+            </button>
+          </div>
         ) : (
-          <p className='text-xl text-center'>You've reached the end of the list.</p>
+          <p className='text-xl text-center'>You've reached the end of list.</p>
         )}
       </div>
     </div>

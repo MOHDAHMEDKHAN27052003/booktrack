@@ -74,9 +74,9 @@ export default function IssuedBooksPage() {
   return (
     <div className='flex justify-center py-8'>
       <div>
-        <h2 className='text-2xl pb-8'>Your Issued Books</h2>
+        <h2 className='text-2xl sm:text-4xl pb-8 md:pb-12 text-center'>Your Issued Books</h2>
         {issuedBooks.length === 0 ? (
-          <p>You have not issued any books.</p>
+          <p className='text-center'>You have not issued any books.</p>
         ) : (
           <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-12'>
             {issuedBooks.map((book) => (

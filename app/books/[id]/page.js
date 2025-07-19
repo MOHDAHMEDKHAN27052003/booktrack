@@ -135,7 +135,7 @@ export default function BookDetailsPage() {
             <div  className='text-center py-8'>
               <button
                 onClick={handleIssue}
-                className='bg-blue-600 text-white px-6 py-2 rounded-lg'
+                className='bg-blue-600 text-white px-6 py-2 rounded-lg cursor-pointer'
               >
                 Issue Book
               </button>
@@ -145,7 +145,7 @@ export default function BookDetailsPage() {
             <div className='text-center py-8'>
               <Link
                 href={"/signin"}
-                className='bg-blue-600 text-white px-6 py-2 rounded-lg' 
+                className='bg-blue-600 text-white px-6 py-2 rounded-lg cursor-pointer' 
               >
                 Issue Book
               </Link>
