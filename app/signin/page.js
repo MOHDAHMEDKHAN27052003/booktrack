@@ -68,7 +68,7 @@ export default function SignIn() {
           </div>
 
           <div className='flex items-center justify-center'>
-            <small>Don't have an account?</small>
+            <small>Do not have an account?</small>
             <Link
               href={"/signup"}
               className='underline'

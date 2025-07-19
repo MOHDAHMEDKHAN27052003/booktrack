@@ -31,7 +31,7 @@ export default function NotReturnedPage() {
     });
 
     setEntries(detailed);
-  }, []);
+  }, [router]);
 
   const visibleEntries = entries.slice(0, visibleCount);
   const hasMore = visibleCount < entries.length;
@@ -69,7 +69,7 @@ export default function NotReturnedPage() {
             </button>
           </div>
         ) : (
-          <p className='text-xl text-center'>You've reached the end of list.</p>
+          <p className='text-xl text-center'>You have reached the end of list.</p>
         )}
       </div>
     </div>

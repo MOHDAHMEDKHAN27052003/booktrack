@@ -137,7 +137,7 @@ export default function Home() {
             </button>
           </div>
         ) : (
-            <p className='text-center py-8 md:py-16 text-lg lg:text-xl'>You've reached the end of list.</p>
+            <p className='text-center py-8 md:py-16 text-lg lg:text-xl'>You have reached the end of list.</p>
         )}
       </div>
     </div>
